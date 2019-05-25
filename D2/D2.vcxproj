@@ -143,16 +143,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="1204.cpp" />
     <ClCompile Include="1284.cpp" />
+    <ClCompile Include="1285.cpp" />
     <ClCompile Include="1288.cpp" />
+    <ClCompile Include="1859.cpp" />
     <ClCompile Include="1926.cpp" />
+    <ClCompile Include="1928.cpp" />
+    <ClCompile Include="1940.cpp" />
     <ClCompile Include="1945.cpp" />
     <ClCompile Include="1946.cpp" />
     <ClCompile Include="1948.cpp" />
+    <ClCompile Include="1954.cpp" />
     <ClCompile Include="1959.cpp" />
     <ClCompile Include="1961.cpp" />
     <ClCompile Include="1966.cpp" />
     <ClCompile Include="1970.cpp" />
+    <ClCompile Include="1974.cpp" />
+    <ClCompile Include="1976.cpp" />
     <ClCompile Include="1979.cpp" />
     <ClCompile Include="1983.cpp" />
     <ClCompile Include="1984.cpp" />
