@@ -4,7 +4,7 @@ using namespace std;
 
 char infix[150];
 char prefix[150];
-char op[150];
+char stk[150];
 int num[150];
 void init()
 {
@@ -12,7 +12,7 @@ void init()
 	{
 		infix[i] = '\0';
 		prefix[i] = '\0';
-		op[i] = '\0';
+		stk[i] = '\0';
 		num[i] = 0;
 	}
 }
@@ -21,73 +21,83 @@ int main()
 	freopen("input.txt", "r", stdin);
 
 	//int T; scanf("%d", &T);
-	for (int cases = 1; cases <= 11; ++cases)
+	for (int cases = 1; cases <= 10; ++cases)
 	{
 		init();
 		int N; scanf("%d", &N);
 		scanf("%s", infix);
+		
 		int pre_index = 0;
-		int op_index = 0;
+		int stk_index = 0;
 		for (int i = 0; infix[i] != 0; ++i)
 		{
 			char c = infix[i];
-			if (c == '(') continue;
-			if (0 <= (c - '0') && (c - '0') < 10)
+			if ('0' <= c && c <= '9')
 			{
 				prefix[pre_index++] = c;
 			}
-			else if (c == ')')
+			else if (c == '(')
 			{
-				prefix[pre_index++] = op[--op_index];
-				op[op_index] = '\0';
+				stk[stk_index++] = c;
 			}
 			else if (c == '+')
 			{
-				if (op_index == 0)
+				if (stk_index == 0)
+					stk[stk_index++] = c;
+				else
 				{
-					op[op_index++] = c;
-					continue;
+					while (stk_index != 0)
+					{
+						if (stk[stk_index - 1] == '+' || stk[stk_index-1] == '*')
+						{
+							prefix[pre_index++] = stk[stk_index-1];
+							stk[--stk_index] = '\0';
+						}
+						else
+						{
+							stk[stk_index++] = c;
+							break;
+						}
+					}
 				}
-				char temp = op[--op_index];
-				op[op_index] = '\0';
-				if (temp == '+' || temp == '*')
-				{
-					prefix[pre_index++] = temp;
-				}
-				op[op_index++] = c;
 			}
 			else if (c == '*')
 			{
-				if (op_index == 0)
+				if (stk_index == 0)
+					stk[stk_index++] = c;
+				else
 				{
-					op[op_index++] = c;
-					continue;
-				}
-				while (1)
-				{
-					if (op_index == 0)
-						break;
-					char temp = op[--op_index];
-					op[op_index] = '\0';
-					if (temp == '*')
+					while (stk_index != 0)
 					{
-						prefix[pre_index++] = temp;
-					}
-					else
-					{
-						op[op_index++] = temp;
-						break;
+						if (stk[stk_index -1] == '*')
+						{
+							prefix[pre_index++] = stk[stk_index-1];
+							stk[--stk_index] = '\0';
+						}
+						else
+						{
+							stk[stk_index++] = c;
+							break;
+						}
 					}
 				}
-				op[op_index++] = c;
+			}
+			else if (c == ')')
+			{
+				while (stk[stk_index-1] != '(')
+				{
+					prefix[pre_index++] = stk[stk_index-1];
+					stk[--stk_index] = '\0';
+				}
+				stk[--stk_index] = '\0';
 			}
 		}
-		pre_index--;
-		for (int i = 0; op[i] != 0; ++i)
+
+		for (int i = stk_index - 1; i >= 0; --i)
 		{
-			prefix[pre_index++] = op[i];
+			prefix[pre_index++] = stk[i];
 		}
-		
+
 		int top = 0;
 		for (int i = 0; prefix[i] != 0; ++i)
 		{
