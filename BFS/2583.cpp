@@ -109,10 +109,10 @@ int main()
     }    
   }
 
-  quickSort(0, K - 1);
+  quickSort(0, ans - 1);
 
   printf("%d\n", ans);
-  for (int i = 0; i < K; ++i)
+  for (int i = 0; i < ans; ++i)
   {
     printf("%d ", area[i]);
   }
