@@ -63,5 +63,14 @@
     <ClCompile Include="SNAIL.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="ASYMTILING.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="POLY.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="NUMB3RS.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
