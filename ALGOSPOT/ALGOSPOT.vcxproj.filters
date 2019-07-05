@@ -72,5 +72,11 @@
     <ClCompile Include="NUMB3RS.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="최대증가부분수열출력.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="PACKING.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
