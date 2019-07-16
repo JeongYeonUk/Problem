@@ -1,32 +1,15 @@
-#include <iostream>
-#include <cstring>
+#pragma warning (disable : 4996)
+#include <cstdio>
 using namespace std;
 
-inline int MAX(int a, int b)
-{
-	return a > b ? a : b;
-}
+#define MAX(a,b) ((a) > (b) ? (a) : (b))
+#define MIN(a,b) ((a) > (b) ? (b) : (a))
 
-inline int MIN(int a, int b)
-{
-	return a > b ? b : a;
-}
-
-inline int GCD(int a, int b)
-{
-	return b == 0 ? a : GCD(b, a % b);
-}
-
-inline int CEIL(int a, int b)
-{
-	return (a + b - 1) / b;
-}
+typedef long long ll;
+const int INF = 0x7FFFFFFF;
 
 int main()
 {
-	ios_base::sync_with_stdio(false); cin.tie(nullptr);
 
-	
-
-	return 0;
+  return 0;
 }
