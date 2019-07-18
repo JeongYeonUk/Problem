@@ -1,9 +1,11 @@
 #include <iostream>
+#include <cstring>
 #include <algorithm>
 #include <vector>
 using namespace std;
 
 typedef long long ll;
+typedef pair<int, int> pii;
 const int INF = 0x7FFFFFFF;
 
 int main()
