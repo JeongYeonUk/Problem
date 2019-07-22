@@ -10,10 +10,25 @@ typedef pair<ll, ll> pll;
 
 const int INF = 0x7FFFFFFF;
 
+int cache[11][11];
+int N, K;
+
+int bino(int n, int r)
+{
+  if (n == r || r == 0)
+    return 1;
+  int& ret = cache[n][r];
+  if (ret > 0) return ret;
+  return ret = bino(n - 1, r - 1) + bino(n - 1, r);
+}
+
 int main()
 {
   ios_base::sync_with_stdio(false);
   cin.tie(nullptr); cout.tie(nullptr);
+
+  cin >> N >> K;
+  cout << bino(N, K) << '\n';
 
   return 0;
 }
