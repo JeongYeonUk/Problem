@@ -1,36 +1,19 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
 #include <cstring>
 using namespace std;
 
-inline int MAX(int a, int b)
-{
-  return a > b ? a : b;
-}
+typedef long long ll;
+typedef pair<int, int> pii;
+typedef pair<ll, ll> pll;
 
-inline int MIN(int a, int b)
-{
-  return a > b ? b : a;
-}
-
-inline int GCD(int a, int b)
-{
-	return b == 0 ? a : GCD(b, a % b);
-}
-
-inline int CEIL(int a, int b)
-{
-	return (a + b - 1) / b;
-}
+const int INF = 0x7FFFFFFF;
 
 int main()
 {
-	ios_base::sync_with_stdio(false); cin.tie(nullptr);
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr); cout.tie(nullptr);
 
-	int T; cin >> T;
-	for (int cases = 0; cases < T; ++cases)
-	{
-
-	}
-
-	return 0;
+  return 0;
 }

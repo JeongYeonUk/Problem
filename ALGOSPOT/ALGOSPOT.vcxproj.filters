@@ -90,5 +90,17 @@
     <ClCompile Include="POTION.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="비트마스크에라토스테네스.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="15퍼즐.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GRADUATION.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CHRISTMAS.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
