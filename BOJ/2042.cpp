@@ -35,7 +35,7 @@ void update(int node, int left, int right, ll idx, ll diff)
 {
   if (idx < left || idx > right)
     return;
-  if (idx >= left && idx <= right)
+  if (left <= idx && idx <= right)
     tree[node] += diff;
   if (left != right)
   {
