@@ -102,5 +102,14 @@
     <ClCompile Include="CHRISTMAS.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="BRACKETS2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ITES.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="TRAVERSAL.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
