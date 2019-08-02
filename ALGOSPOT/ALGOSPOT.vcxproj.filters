@@ -111,5 +111,11 @@
     <ClCompile Include="TRAVERSAL.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="FORTREES.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="NERD2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
