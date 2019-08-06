@@ -117,5 +117,17 @@
     <ClCompile Include="NERD2.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="INSERTION.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="RUNNINGMEDIAN.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MORDOR.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="MEASURETIME.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
