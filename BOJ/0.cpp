@@ -8,7 +8,7 @@ typedef long long ll;
 typedef pair<int, int> pii;
 typedef pair<ll, ll> pll;
 
-const int INF = 0x7FFFFFFF;
+const int INF = 987654321;
 
 int main()
 {
