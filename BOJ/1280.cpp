@@ -8,72 +8,57 @@ typedef long long ll;
 typedef pair<int, int> pii;
 typedef pair<ll, ll> pll;
 
-const int INF = 0x7FFFFFFF;
-const int MAX_N = 200003;
-const ll MOD = 1e9 + 7;
+const int INF = 987654321;
+const int MAX_N = 200001;
+const int MOD = 1000000007;
+
+ll cnt[MAX_N];
+ll seg[MAX_N];
 int N;
-ll arr[MAX_N];
-ll cntTree[MAX_N];
-ll sumTree[MAX_N];
 
-ll _sum(ll* tree, ll i)
+void update(ll* arr, int idx, ll val)
 {
-	ll ret = 0;
-	while (i > 0)
-	{
-		ret += tree[i];
-		i -= (i & -i);
-	}
-	return ret;
+  for (int i = idx; i <= MAX_N; i += (i & -i))
+    arr[i] += val;
 }
 
-ll sum(ll* tree, ll s, ll e)
+ll _sum(ll* arr, int idx)
 {
-	if (s > e) return 0;
-	return (_sum(tree, e) - _sum(tree, s - 1));
+  ll ret = 0;
+  for (int i = idx; i > 0; i -= (i & -i))
+    ret += arr[i];
+  return ret;
 }
 
-void update(ll* tree, ll i, ll val)
+ll sum(ll* arr, int s, int e)
 {
-	while (i <= MAX_N)
-	{
-		tree[i] += val;
-		i += (i & -i);
-	}
+  if (s > e) return 0;
+  return (_sum(arr, e) - _sum(arr, s - 1));
 }
 
 int main()
 {
-	ios_base::sync_with_stdio(false);
-	cin.tie(nullptr); cout.tie(nullptr);
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr); cout.tie(nullptr);
 
-	cin >> N;
-	for (int i = 1; i <= N; ++i)
-	{
-		ll x; cin >> x;
-		x += 1;
-		if (i == 1)
-		{
-			update(cntTree, x, 1LL);
-			update(sumTree, x, x);
-		}
-		else
-		{
-			arr[i] += sum(sumTree, x + 1, MAX_N)
-				- x * sum(cntTree, x + 1, MAX_N);
-			arr[i] += sum(cntTree, 1, x - 1) * x
-				- sum(sumTree, 1, x - 1);
-			arr[i] %= MOD;
-			update(cntTree, x, 1LL);
-			update(sumTree, x, x);
-		}
-	}
-	ll ret = 1;
-	for (int i = 2; i <= N; ++i)
-	{
-		ret *= arr[i];
-		ret %= MOD;
-	}
-	cout << ret << '\n';
-	return 0;
+  cin >> N;
+  ll ret = 1;
+  for (int i = 0; i < N; ++i)
+  {
+    int x; cin >> x;
+    x += 1;
+    if (i)
+    {
+      ll front = (sum(cnt, 1, x - 1) * x) - sum(seg, 1, x - 1);
+      ll back = (sum(seg, x + 1, MAX_N-1)) - (sum(cnt, x + 1, MAX_N-1) * x);
+      ret *= (front + back) % MOD;
+      ret %= MOD;
+    }
+    update(cnt, x, 1LL);
+    update(seg, x, x);
+  }
+
+  cout << ret << '\n';
+
+  return 0;
 }
