@@ -1,46 +1,31 @@
 #include <iostream>
 #include <cstring>
+#include <algorithm>
 using namespace std;
 
-inline int MAX(int a, int b)
-{
-	return a > b ? a : b;
-}
+typedef long long ll;
 
-inline int MIN(int a, int b)
-{
-	return a > b ? b : a;
-}
+const int INF = 987654321;
+const int MOD = 10007;
 
-inline int GCD(int a, int b)
-{
-	return b == 0 ? a : GCD(b, a % b);
-}
-
-inline int CEIL(int a, int b)
-{
-	return (a + b - 1) / b;
-}
-
-int cache[1001];
-
-int solve(int width)
-{
-	if (width <= 1)
-		return 1;
-	int& ret = cache[width];
-	if (ret != -1) return ret;
-	return ret = (solve(width - 1) + 2 * solve(width - 2)) % 10007;
-}
+int d[1001];
 
 int main()
 {
-	ios_base::sync_with_stdio(false); cin.tie(nullptr);
+  ios_base::sync_with_stdio(false);
+  cin.tie(nullptr); cout.tie(nullptr);
 
-	int n; cin >> n;
-	memset(cache, -1, sizeof(cache));
-	cache[1] = 1;
-	cout << solve(n) << '\n';
+  int N; cin >> N;
 
-	return 0;
+  d[0] = 0;
+  d[1] = 1;
+  d[2] = 3;
+  for (int i = 3; i <= N; ++i)
+  {
+    d[i] = (d[i - 1] + 2 * d[i - 2]) % MOD;
+  }
+
+  cout << d[N] << '\n';
+
+  return 0;
 }
