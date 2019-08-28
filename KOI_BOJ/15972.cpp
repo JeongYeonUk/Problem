@@ -1,38 +1,31 @@
 #include <iostream>
 #include <cstring>
-#include <vector>
-#include <queue>
 #include <algorithm>
+#include <queue>
 using namespace std;
 
 const int INF = 987654321;
+const int MAX = 1010;
 
-struct hole
-{
-	int up, down, left, right;
-};
-struct pqelem
-{
-	int x, y, amount;
-};
+int N,M,H, ans;
+int rh[MAX][MAX], ch[MAX][MAX];
+bool chk[MAX][MAX];
 
-struct cmp
+struct Data
 {
-	bool operator()(pqelem& a, pqelem& b)
+	int r, c, h;
+	bool operator<(const Data& r) const
 	{
-		return a.amount > b.amount ? true : false;
+		return h > r.h;
 	}
 };
 
-vector<vector<hole> >input;
-vector<vector<int> > ans;
-priority_queue<pqelem, vector<pqelem>, cmp>pq;
-int n, m, h;
-int sum;
+priority_queue<Data> pq;
 
-int fi(int k)
+void push(int r, int c, int h)
 {
-	return (k >= 0) ? k : h;
+	if (chk[r][c]) return;
+	pq.push({ r,c,h });
 }
 
 int main()
@@ -40,191 +33,77 @@ int main()
 	ios_base::sync_with_stdio(false);
 	cin.tie(nullptr); cout.tie(nullptr);
 
-	int temp;
-	cin >> n >> m >> h;
-	input.resize(n + 1, vector<hole>(m + 1, { -1,-1,-1,-1 }));
-	ans.resize(n + 1, vector<int>(m + 1, h));
-
-	for (int i = 0; i < m; ++i)
+	cin >> N >> M >> H;
+	
+	// input row
+	for (int i = 1; i <= N + 1; ++i)
 	{
-		cin >> temp;
-		input[0][i].up = temp;
-	}
-
-	for (int i = 0; i < n - 1; ++i)
-	{
-		for (int j = 0; j < m; ++j)
+		for (int j = 1; j <= M; ++j)
 		{
-			cin >> temp;
-			input[i][j].down = temp;
-			input[i + 1][j].up = temp;
+			cin >> rh[i][j];
+			if (rh[i][j] == -1) rh[i][j] = H;
 		}
 	}
 
-	for (int i = 0; i < m; ++i)
+	// input col
+	for (int i = 1; i <= N; ++i)
 	{
-		cin >> temp;
-		input[n - 1][i].down = temp;
-	}
-
-	for (int i = 0; i < n; ++i)
-	{
-		cin >> temp;
-		input[i][0].left = temp;
-		for (int j = 0; j < m - 1; ++j)
+		for (int j = 1; j <= M+1; ++j)
 		{
-			cin >> temp;
-			input[i][j].right = temp;
-			input[i][j + 1].left = temp;
-		}
-		cin >> temp;
-		input[i][m - 1].right = temp;
-	}
-
-	if (n == 1 && m == 1)
-	{
-		cout << min(fi(input[0][0].up),
-			min(fi(input[0][0].down),
-				min(fi(input[0][0].left),
-					fi(input[0][0].right)))) << '\n';
-		return 0;
-	}
-	else if (n == 1)
-	{
-		ans[0][0] = min({ fi(input[0][0].up)
-			, fi(input[0][0].left)
-			, fi(input[0][0].down) });
-		ans[0][m-1] = min({ fi(input[0][m - 1].up)
-			, fi(input[0][m - 1].right)
-			, fi(input[0][m - 1].down) });
-		pq.push({ 0,0,ans[0][0] });
-		pq.push({ 0,m - 1,ans[0][m - 1] });
-	}
-	else if (m == 1)
-	{
-		ans[0][0] = min({ fi(input[0][0].right)
-			, fi(input[0][0].left)
-			, fi(input[0][0].up) });
-		ans[n-1][0] = min({ fi(input[n-1][0].left)
-			, fi(input[n-1][0].right)
-			, fi(input[n-1][0].down) });
-		pq.push({ 0,0,ans[0][0] });
-		pq.push({ n - 1,0,ans[n - 1][0] });
-	}
-	else
-	{
-		ans[0][0] = min(fi(input[0][0].up), fi(input[0][0].left));
-		ans[0][m - 1] = min(fi(input[0][m-1].up), fi(input[0][m - 1].right));
-		ans[n - 1][0] = min(fi(input[n - 1][0].left), fi(input[n - 1][0].down));
-		ans[n - 1][m - 1] = min(fi(input[n - 1][m - 1].right), fi(input[n - 1][m - 1].down));
-
-		pq.push({ 0,0,ans[0][0] });
-		pq.push({ 0,m-1,ans[0][m-1] });
-		pq.push({ n-1,0,ans[n-1][0] });
-		pq.push({ n-1,m-1,ans[n-1][m-1] });
-	}
-
-	for (int i = 1; i < n - 1; ++i)
-	{
-		if (m == 1)
-		{
-			ans[i][0] = min(fi(input[i][0].left), fi(input[i][0].right));
-			pq.push({ i,0,ans[i][0] });
-		}
-		else
-		{
-			ans[i][0] = fi(input[i][0].left);
-			ans[i][m - 1] = fi(input[i][m - 1].right);
-
-			pq.push({ i,0,ans[i][0] });
-			pq.push({ i,m - 1,ans[i][m - 1] });
+			cin >> ch[i][j];
+			if (ch[i][j] == -1) ch[i][j] = H;
 		}
 	}
 
+	// ¡á¡à¡à¡à¡à¡à¡à¡à¡à¡á
+	// ¡á¡à¡à¡à¡à¡à¡à¡à¡à¡á
+	// ¡á¡à¡à¡à¡à¡à¡à¡à¡à¡á
+	// make
+	for (int i = 1; i <= N; ++i)
+	{
+		push(i, 1, ch[i][1]);
+		push(i, M, ch[i][M + 1]);
+		chk[i][0] = chk[i][M + 1] = true;
+	}
+
+	//  ¡á¡á¡á¡á¡á¡á¡á¡á
+	// ¡á¡à¡à¡à¡à¡à¡à¡à¡à¡á
+	// ¡á¡à¡à¡à¡à¡à¡à¡à¡à¡á
+	// ¡á¡à¡à¡à¡à¡à¡à¡à¡à¡á
+	//  ¡á¡á¡á¡á¡á¡á¡á¡á
+	// make
+	for (int i = 1; i <= M; ++i)
+	{
+		push(1, i, rh[1][i]);
+		push(N, i, rh[N + 1][i]);
+		chk[0][i] = chk[N + 1][i] = true;
+	}
+
+	Data tmp;
+	int r, c, h;
 	while (!pq.empty())
 	{
-		int x = pq.top().x, y = pq.top().y, amount = pq.top().amount;
-		cout << x << ' ' << y << ' ' << amount << '\n';
-		pq.pop();
-		if (ans[x][y] != amount)
-			continue;
-		if (x > 0
-			&& input[x][y].up >= 0
-			&& ans[x - 1][y] > input[x][y].up
-			&& ans[x][y] <= input[x][y].up)
-		{
-			ans[x - 1][y] = input[x][y].up;
-			pq.push({ x - 1,y,ans[x - 1][y] });
-		}
-		else if (x > 0
-			&& input[x][y].up >= 0
-			&& ans[x][y] >= input[x][y].up
-			&& ans[x - 1][y] > ans[x][y])
-		{
-			ans[x - 1][y] = ans[x][y];
-			pq.push({ x - 1,y,ans[x - 1][y] });
-		}
+		tmp = pq.top(); pq.pop();
+		r = tmp.r, c = tmp.c, h = tmp.h;
+		if (chk[r][c]) continue;
+		chk[r][c] = true;
+		ans += h;
+		
+		// up
+		// max  :  inner hole
+		push(r - 1, c, max(h, rh[r][c]));
 
-		if (x < n - 1
-			&& input[x][y].down >= 0
-			&& ans[x + 1][y] > input[x][y].down
-			&& ans[x][y] <= input[x][y].down)
-		{
-			ans[x + 1][y] = input[x][y].down;
-			pq.push({ x + 1,y,ans[x + 1][y] });
-		}
-		else if (x < n - 1
-			&& input[x][y].down >= 0
-			&& ans[x][y] >= input[x][y].down
-			&& ans[x][y] < ans[x+1][y])
-		{
-			ans[x + 1][y] = ans[x][y];
-			pq.push({ x + 1,y,ans[x + 1][y] });
-		}
+		// down
+		push(r + 1, c, max(h, rh[r + 1][c]));
 
-		if (y > 0
-			&& input[x][y].left >= 0
-			&& ans[x][y - 1] > input[x][y].left
-			&& ans[x][y] <= input[x][y].left)
-		{
-			ans[x][y - 1] = input[x][y].left;
-			pq.push({ x,y - 1, ans[x][y - 1] });
-		}
-		else if (y > 0
-			&& input[x][y].left >= 0
-			&& ans[x][y] >= input[x][y].left
-			&& ans[x][y-1] > ans[x][y])
-		{
-			ans[x][y - 1] = ans[x][y];
-			pq.push({ x,y - 1, ans[x][y - 1] });
-		}
+		// left
+		push(r, c - 1, max(h, ch[r][c]));
 
-		if (y < m - 1
-			&& input[x][y].right >= 0
-			&& ans[x][y + 1] > input[x][y].right
-			&& ans[x][y] <= input[x][y].right)
-		{
-			ans[x][y + 1] = input[x][y].right;
-			pq.push({ x,y + 1,ans[x][y + 1] });
-		}
-		else if (y < m - 1
-			&& input[x][y].right >= 0
-			&& ans[x][y] >= input[x][y].right
-			&& ans[x][y+1] > ans[x][y])
-		{
-			ans[x][y + 1] = ans[x][y];
-			pq.push({ x,y + 1,ans[x][y + 1] });
-		}
+		// right
+		push(r, c + 1, max(h, ch[r][c + 1]));
 	}
 
-	for (int i = 0; i < n; ++i)
-	{
-		for (int j = 0; j < m; ++j)
-		{
-			sum += ans[i][j];
-		}
-	}
-	cout << sum << '\n';
+	cout << ans << '\n';
 
 	return 0;
 }
