@@ -1,7 +1,8 @@
 #include <iostream>
 #include <cstring>
-#include <algorithm>
 using namespace std;
+
+#define endl '\n'
 
 typedef long long ll;
 
