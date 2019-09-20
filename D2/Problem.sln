@@ -25,6 +25,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BOJ", "..\BOJ\BOJ.vcxproj",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KOI_BOJ", "..\KOI_BOJ\KOI_BOJ.vcxproj", "{DBA2EADD-D92F-4B4E-BB48-85A4173A2CBB}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PROGRAMMERS", "..\PROGRAMMERS\PROGRAMMERS.vcxproj", "{6344E626-540D-4EDD-A01D-C91C9328CFE1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -121,6 +123,14 @@ Global
 		{DBA2EADD-D92F-4B4E-BB48-85A4173A2CBB}.Release|x64.Build.0 = Release|x64
 		{DBA2EADD-D92F-4B4E-BB48-85A4173A2CBB}.Release|x86.ActiveCfg = Release|Win32
 		{DBA2EADD-D92F-4B4E-BB48-85A4173A2CBB}.Release|x86.Build.0 = Release|Win32
+		{6344E626-540D-4EDD-A01D-C91C9328CFE1}.Debug|x64.ActiveCfg = Debug|x64
+		{6344E626-540D-4EDD-A01D-C91C9328CFE1}.Debug|x64.Build.0 = Debug|x64
+		{6344E626-540D-4EDD-A01D-C91C9328CFE1}.Debug|x86.ActiveCfg = Debug|Win32
+		{6344E626-540D-4EDD-A01D-C91C9328CFE1}.Debug|x86.Build.0 = Debug|Win32
+		{6344E626-540D-4EDD-A01D-C91C9328CFE1}.Release|x64.ActiveCfg = Release|x64
+		{6344E626-540D-4EDD-A01D-C91C9328CFE1}.Release|x64.Build.0 = Release|x64
+		{6344E626-540D-4EDD-A01D-C91C9328CFE1}.Release|x86.ActiveCfg = Release|Win32
+		{6344E626-540D-4EDD-A01D-C91C9328CFE1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
