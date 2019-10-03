@@ -159,5 +159,20 @@
     <ClCompile Include="전화번호 목록.cpp">
       <Filter>소스 파일\LEVEL2</Filter>
     </ClCompile>
+    <ClCompile Include="H-Index.cpp">
+      <Filter>소스 파일\LEVEL2</Filter>
+    </ClCompile>
+    <ClCompile Include="숫자 야구.cpp">
+      <Filter>소스 파일\LEVEL2</Filter>
+    </ClCompile>
+    <ClCompile Include="위장.cpp">
+      <Filter>소스 파일\LEVEL2</Filter>
+    </ClCompile>
+    <ClCompile Include="구명보트.cpp">
+      <Filter>소스 파일\LEVEL2</Filter>
+    </ClCompile>
+    <ClCompile Include="카펫.cpp">
+      <Filter>소스 파일\LEVEL2</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
