@@ -174,5 +174,20 @@
     <ClCompile Include="카펫.cpp">
       <Filter>소스 파일\LEVEL2</Filter>
     </ClCompile>
+    <ClCompile Include="타겟 넘버.cpp">
+      <Filter>소스 파일\LEVEL2</Filter>
+    </ClCompile>
+    <ClCompile Include="라면공장.cpp">
+      <Filter>소스 파일\LEVEL2</Filter>
+    </ClCompile>
+    <ClCompile Include="가장 큰 정사각형 찾기.cpp">
+      <Filter>소스 파일\LEVEL2</Filter>
+    </ClCompile>
+    <ClCompile Include="올바른 괄호.cpp">
+      <Filter>소스 파일\LEVEL2</Filter>
+    </ClCompile>
+    <ClCompile Include="다음 큰 숫자2.cpp">
+      <Filter>소스 파일\LEVEL2</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
