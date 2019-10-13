@@ -1,4 +1,5 @@
-#include <iostream>
+#pragma warning(disable:4996)
+#include <cstdio>
 #include <cstring>
 using namespace std;
 
@@ -10,8 +11,6 @@ const int INF = 987654321;
 
 int main()
 {
-  ios_base::sync_with_stdio(false);
-  cin.tie(nullptr); cout.tie(nullptr);
 
   return 0;
 }
