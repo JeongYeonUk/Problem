@@ -1,112 +1,100 @@
-#include <iostream>
+#pragma warning(disable:4996)
+#include <cstdio>
 #include <cstring>
-#include <vector>
-#include <algorithm>
+#include <list>
 using namespace std;
+
+#define endl '\n'
 
 typedef long long ll;
 
 const int INF = 987654321;
-const int dx[] = { 1,1,0,-1,-1,-1,0,1 };
-const int dy[] = { 0,1,1,1,0,-1,-1,-1 };
 
-struct TREE {
+struct TREE
+{
 	int y, x, age;
 	bool alive;
 };
 
-bool cmp(TREE& a, TREE& b) {
-	return a.age < b.age;
+int n, m, k;
+int a[10][10];
+int f[10][10];
+list<TREE> trees;
+
+const int dx[] = { 1,1,0,-1,-1,-1,0,1 };
+const int dy[] = { 0,1,1,1,0,-1,-1,-1 };
+
+int solve()
+{
+	typedef list<TREE>::iterator ITER;
+	for (int year = 0; year < k; ++k)
+	{
+		for (ITER it = trees.begin(); it != trees.end(); ++it)
+		{
+			if (it->age <= f[it->y][it->x])
+			{
+				f[it->y][it->x] -= it->age;
+				it->age++;
+			}
+			else
+			{
+				it->alive = false;
+			}
+		}
+		for (ITER it = trees.begin(); it != trees.end(); ++it)
+		{
+			if (it->alive)
+				++it;
+			else
+			{
+				f[it->y][it->x] += it->age / 2;
+				it = trees.erase(it);
+			}
+		}
+		for (ITER it = trees.begin(); it != trees.end(); ++it)
+		{
+			if (it->age % 5 == 0)
+			{
+				for (int dir = 0; dir < 8; ++dir)
+				{
+					int ny = it->y + dy[dir];
+					int nx = it->x + dx[dir];
+					if (ny < 0 || nx < 0 || nx >= n || ny >= n)
+						continue;
+					trees.push_front({ ny,nx,1,true });
+				}
+			}
+		}
+		for (int y = 0; y < n; ++y)
+		{
+			for (int x = 0; x < n; ++x)
+			{
+				f[y][x] += a[y][x];
+			}
+		}
+	}
+	return trees.size();
 }
 
-int N, M, K;
-int map[50][50], A[50][50];
-vector<TREE> tree;
 int main()
 {
-	ios_base::sync_with_stdio(false);
-	cin.tie(nullptr); cout.tie(nullptr);
-
-	cin >> N >> M >> K;
-	for (int y = 0; y < N; ++y) {
-		for (int x = 0; x < N; ++x) {
-			cin >> A[y][x];
-			map[y][x] = 5;
+	scanf("%d %d %d", &n, &m, &k);
+	for (int y = 0; y < n; ++y)
+	{
+		for (int x = 0; x < n; ++x)
+		{
+			scanf("%d", &a[y][x]);
+			f[y][x] = 5;
 		}
 	}
-	for (int i = 0; i < M; ++i) {
-		int x, y, age; cin >> x >> y >> age;
-		x--; y--; tree.push_back({ y,x,age,true });
+	int x, y, z;
+	for (int i = 0; i < m; ++i)
+	{
+		scanf("%d %d %d", &y, &x, &z);
+		trees.push_back({ y - 1,x - 1,z,true });
 	}
 
-	int tree_count;
-	int dead_count = 0;
-	for (int year = 1; year <= K; ++year) {
-		tree_count = (int)tree.size();
-		dead_count = 0;
-		for (int season = 1; season <= 4; ++season) {
-			switch (season)
-			{
-			case 1:
-			{
-				sort(tree.begin(), tree.end(), cmp);
-				for (int i = 0; i < tree_count; ++i) {
-					int& food = map[tree[i].y][tree[i].x];
-					if (food - tree[i].age < 0) {
-						tree[i].alive = false;
-						tree[i].age *= -1;
-						dead_count++;
-					}
-					else {
-						food -= tree[i].age;
-						tree[i].age++;
-					}
-				}
-				break;
-			}
-			case 2:
-			{
-				sort(tree.begin(), tree.end(), cmp);
-				for (int i = 0; i < tree_count; ++i) {
-					if (tree[i].alive) break;
-					A[tree[i].y][tree[i].x] += ((tree[i].age * -1) / 2);
-				}
-				reverse(tree.begin(), tree.end());
-				for (int i = 0; i < dead_count; ++i)
-					tree.pop_back();
-				sort(tree.begin(), tree.end(), cmp);
-				tree_count = (int)tree.size();
-				break;
-			}
-			case 3:
-			{
-				for (int i = 0; i < tree_count; ++i) {
-					if (tree[i].age % 5 == 0) {
-						for (int dir = 0; dir < 8; ++dir) {
-							int ny = tree[i].y + dy[dir];
-							int nx = tree[i].x + dx[dir];
-							if (ny < 0 || nx < 0 || ny >= N || nx >= N)
-								continue;
-							tree.push_back({ ny,nx,1,true });
-						}
-					}
-				}
-				break;
-			}
-			case 4:
-			{
-				for (int y = 0; y < N; ++y) {
-					for (int x = 0; x < N; ++x) {
-						map[y][x] += A[y][x];
-					}
-				}
-				break;
-			}
-			default:
-				break;
-			}
-		}
-	}
-	cout << (int)tree.size() << '\n';
+	printf("%d\n", solve());
+
 	return 0;
 }

@@ -1,5 +1,6 @@
 #pragma warning (disable:4996)
 #include <cstdio>
+#include <cstring>
 using namespace std;
 
 int main()
