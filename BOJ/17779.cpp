@@ -1,9 +1,7 @@
 #pragma warning(disable:4996)
 #include <cstdio>
 #include <cstring>
-#include <cmath>
 #include <algorithm>
-#include <queue>
 using namespace std;
 
 #define endl '\n'
@@ -11,192 +9,135 @@ using namespace std;
 typedef long long ll;
 
 const int INF = 987654321;
-const int dx[] = { 1,0,-1,0 };
-const int dy[] = { 0,-1,0,1 };
+const int dx[] = { -1,1 };
+const int dy[] = { 1,1 };
+
 struct INFO
 {
-  int y, x;
+	int y, x;
 };
 
 int map[20][20];
 int label[20][20];
 int n, ret;
-int val[6];
 
-int findArea(INFO start, INFO end, int number)
+void solve(int y, int x, int left, int right)
 {
-  int sum = 0;
-  if (number == 1)
-  {
-    for (int y = start.y; y <= end.y; ++y)
-    {
-      for (int x = start.x; x <= end.x; ++x)
-      {
-        if (label[y][x] == 5)
-          continue;
-        if (label[y][x] == 0)
-        {
-          sum += map[y][x];
-          label[y][x] = number;
-        }
-      }
-    }
-  }
-  else if (number == 2)
-  {
-    for (int y = start.y; y <= end.y; ++y)
-    {
-      for (int x = end.x; x <= start.x; ++x)
-      {
-        if (label[y][x] == 5)
-          continue;
-        if (label[y][x] == 0)
-        {
-          sum += map[y][x];
-          label[y][x] = number;
-        }
-      }
-    }
-  }
-  else if (number == 3)
-  {
-    for (int y = end.y; y <= start.y; ++y)
-    {
-      for (int x = start.x; x <= end.x; ++x)
-      {
-        if (label[y][x] == 5)
-          continue;
-        if (label[y][x] == 0)
-        {
-          sum += map[y][x];
-          label[y][x] = number;
-        }
-      }
-    }
-  }
-  else if(number == 4)
-  {
-    for (int y = end.y; y <= start.y; ++y)
-    {
-      for (int x = end.x; x <= start.x; ++x)
-      {
-        if (label[y][x] == 5)
-          continue;
-        if (label[y][x] == 0)
-        {
-          sum += map[y][x];
-          label[y][x] = number;
-        }
-      }
-    }
-  }
-  return sum;
-}
+	if (y + left + right >= n)
+		return;
+	memset(label, 0, sizeof(label));
+	INFO pos[4];
+	pos[0] = { y,x }; // top
+	pos[1] = { y + left, x - left }; // left
+	pos[2] = { y + right, x + right }; // right
+	pos[3] = { y + left + right, x + (right - left) }; // bottom
 
-int makeFiveArea(int sy, int sx, int sleft, int sright)
-{
-  INFO top, left, right, bottom;
-  top = { sy, sx }; label[top.y][top.x] = 5;
-  left = { sy + sleft, sx - sleft }; label[left.y][left.x] = 5;
-  right = { sy + sright, sx + sright }; label[right.y][right.x] = 5;
-  bottom = { sy + sleft + sright, sx + (sright - sleft) }; label[bottom.y][bottom.x] = 5;
-  int nx = top.x;
-  for (int y = sy; y < left.y; ++y)
-  {
-    label[y][nx] = 5;
-    nx -= 1;
-  }
-  nx = top.x;
-  for (int y = sy; y < right.y; ++y)
-  {
-    label[y][nx] = 5;
-    nx += 1;
-  }
-  nx = left.x;
-  for (int y = left.y; y < bottom.y; ++y)
-  {
-    label[y][nx] = 5;
-    nx += 1;
-  }
-  nx = right.x;
-  for (int y = right.y; y < bottom.y; ++y)
-  {
-    label[y][nx] = 5;
-    nx -= 1;
-  }
+	label[y][x] = 5;
+	for (int i = 1; i <= left; ++i)
+	{
+		label[y + dy[0] * i][x + dx[0] * i] = 5;
+	}
+	for (int i = 1; i <= right; ++i)
+	{
+		label[y + dy[1] * i][x + dx[1] * i] = 5;
+	}
+	int xx = x + dx[0] * left;
+	int yy = y + dy[0] * left;
+	for (int i = 1; i <= right; ++i)
+	{
+		label[yy + dy[1] * i][xx + dx[1] * i] = 5;
+	}
+	xx = x + dx[1] * right;
+	yy = y + dy[1] * right;
+	for (int i = 1; i <= left; ++i)
+	{
+		label[yy + dy[0] * i][xx + dx[0] * i] = 5;
+	}
 
-  bool stFlag = false;
-  for (int y = top.y + 1; y < bottom.y; ++y)
-  {
-    for (int x = 0; x < n; ++x)
-    {
-      if (!stFlag && label[y][x] == 5)
-      {
-        stFlag = true;
-      }
-      else if (stFlag && label[y][x] == 5)
-      {
-        stFlag = false;
-        break;
-      }
-      if (stFlag)
-      {
-        label[y][x] = 5;
-      }
-    }
-  }
+	for (int y = 0; y < pos[1].y; ++y)
+	{
+		for (int x = 0; x <= pos[0].x; ++x)
+		{
+			if (label[y][x] == 5)
+				break;
+			label[y][x] = 1;
+		}
+	}
 
-  val[1] = findArea({ 0,0 }, { left.y - 1, top.x }, 1);
-  val[2] = findArea({ 0,n - 1 }, { right.y, top.x + 1 }, 2);
-  val[3] = findArea({ n - 1,0 }, { left.y, bottom.x - 1 }, 3);
-  val[4] = findArea({ n - 1,n - 1 }, { right.y + 1, bottom.x }, 4);
-  int sum = 0;
-  for (int y = 0; y < n; ++y)
-  {
-    for (int x = 0; x < n; ++x)
-    {
-      if (label[y][x] == 5 || label[y][x] == 0)
-      {
-        sum += map[y][x];
-      }
-    }
-  }
-  return sum;
+	for (int y = 0; y <= pos[2].y; ++y)
+	{
+		for (int x = n - 1; x > pos[0].x; --x)
+		{
+			if (label[y][x] == 5)
+				break;
+			label[y][x] = 2;
+		}
+	}
+
+	for (int y = pos[1].y; y < n; ++y)
+	{
+		for (int x = 0; x < pos[3].x; ++x)
+		{
+			if (label[y][x] == 5)
+				break;
+			label[y][x] = 3;
+		}
+	}
+
+	for (int y = pos[2].y + 1; y < n; ++y)
+	{
+		for (int x = n - 1; x >= pos[3].x; --x)
+		{
+			if (label[y][x] == 5)
+				break;
+			label[y][x] = 4;
+		}
+	}
+
+	int sum[6] = { 0, };
+	for (int y = 0; y < n; ++y)
+	{
+		for (int x = 0; x < n; ++x)
+		{
+			if (label[y][x] == 5 || label[y][x] == 0)
+				sum[5] += map[y][x];
+			else
+				sum[label[y][x]] += map[y][x];
+		}
+	}
+	int maxSum = *max_element(sum + 1, sum + 6);
+	int minSum = *min_element(sum + 1, sum + 6);
+	ret = min(ret, maxSum - minSum);
 }
 
 int main()
 {
-  scanf("%d", &n);
-  for (int y = 0; y < n; ++y)
-  {
-    for (int x = 0; x < n; ++x)
-    {
-      scanf("%d", &map[y][x]);
-    }
-  }
-  ret = INF;
-  for (int y = 0; y < n - 2; ++y)
-  {
-    for (int x = 1; x < n - 1; ++x)
-    {
-      for (int left = 1; left < n; ++left)
-      {
-        if (x - left < 0)
-          break;
-        for (int right = 1; right < n; ++right)
-        {
-          if (x + right >= n)
-            break;
-          memset(label, 0, sizeof(label));
-          val[5] = makeFiveArea(y, x, left, right);
-          int maxi = 0, mini = INF;
-          maxi = *max_element(val + 1, val + 6);
-          mini = *min_element(val + 1, val + 6);
-          ret = min(ret, abs(maxi - mini));
-        }
-      }
-    }
-  }
-  printf("%d\n", ret);
-  return 0;
+	scanf("%d", &n);
+	for (int y = 0; y < n; ++y)
+	{
+		for (int x = 0; x < n; ++x)
+		{
+			scanf("%d", &map[y][x]);
+		}
+	}
+	ret = INF;
+	for (int y = 0; y < n - 2; ++y)
+	{
+		for (int x = 1; x < n - 1; ++x)
+		{
+			for (int left = 1; left < n; ++left)
+			{
+				if (x - left < 0)
+					break;
+				for (int right = 1; right < n; ++right)
+				{
+					if (x + right >= n)
+						break;
+					solve(y, x, left, right);
+				}
+			}
+		}
+	}
+	printf("%d\n", ret);
+	return 0;
 }
