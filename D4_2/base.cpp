@@ -3,6 +3,8 @@
 #include <cstring>
 using namespace std;
 
+const int INF = 987654321;
+
 int main()
 {
   freopen("input.txt", "r", stdin);
