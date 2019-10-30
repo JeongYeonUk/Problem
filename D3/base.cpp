@@ -1,14 +1,13 @@
-#include <iostream>
+#pragma warning (disable : 4996)
+#include <cstdio>
+#include <cstring>
 #include <vector>
 #include <algorithm>
 using namespace std;
 
 int main()
 {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-
-	int T; cin >> T;
+  int T; scanf("%d", &T);
 	for (int cases = 1; cases <= T; ++cases)
 	{
 
