@@ -9,19 +9,23 @@ typedef long long ll;
 
 const int INF = 987654321;
 
-int arr[(1 << 25) / 32];
 int main()
 {
-  int n;
-  while (~scanf("%d", &n))
+  int n; scanf("%d", &n);
+  int cnt = 1;
+  while (n != 1)
   {
-    int x = n / 32;
-    int y = 1 << (n % 32);
-    if (!(arr[x] & y))
+    if (n & 1)
     {
-      printf("%d ", n);
-      arr[x] |= y;
+      n = 3 * n + 1;
     }
+    else
+    {
+      n /= 2;
+    }
+    cnt++;
   }
+
+  printf("%d\n", cnt);
   return 0;
 }
