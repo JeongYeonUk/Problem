@@ -1,33 +1,32 @@
-#include <iostream>
+#pragma warning(disable:4996)
+#include <cstdio>
 #include <cstring>
 using namespace std;
+
+#define endl '\n'
 
 typedef long long ll;
 
 const int INF = 987654321;
-const int MAX_N = 10001;
+const int MAX = 10001;
 
-int arr[MAX_N];
+int arr[MAX];
 
 int main()
 {
-	ios_base::sync_with_stdio(false);
-	cin.tie(nullptr); cout.tie(nullptr);
-	
-	int N; cin >> N;
-	for (int i = 1; i <= N; ++i)
+	int n; scanf("%d", &n);
+	for (int i = 0; i < n; ++i)
 	{
-		int tmp; cin >> tmp;
-		arr[tmp] += 1;
+		int x; scanf("%d", &x);
+		arr[x]++;
 	}
-	for (int i = 1; i <= 10000; ++i)
+
+	for (int i = 1; i < MAX; ++i)
 	{
-		if (arr[i] != 0)
+		while (arr[i])
 		{
-			for (int j = 0; j < arr[i]; ++j)
-			{
-				cout << i << '\n';
-			}
+			printf("%d\n", i);
+			arr[i]--;
 		}
 	}
 
