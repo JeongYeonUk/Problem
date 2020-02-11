@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <cstring>
 #include <queue>
 #include <set>
 using namespace std;
