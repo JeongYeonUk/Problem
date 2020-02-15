@@ -687,5 +687,17 @@
     <ClCompile Include="2636.cpp">
       <Filter>소스 파일\2000</Filter>
     </ClCompile>
+    <ClCompile Include="2638.cpp">
+      <Filter>소스 파일\2000</Filter>
+    </ClCompile>
+    <ClCompile Include="1726.cpp">
+      <Filter>소스 파일\1000</Filter>
+    </ClCompile>
+    <ClCompile Include="1939.cpp">
+      <Filter>소스 파일\1000</Filter>
+    </ClCompile>
+    <ClCompile Include="5213.cpp">
+      <Filter>소스 파일\5000</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
