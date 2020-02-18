@@ -711,5 +711,11 @@
     <ClCompile Include="2550.cpp">
       <Filter>소스 파일\2000</Filter>
     </ClCompile>
+    <ClCompile Include="12851.cpp">
+      <Filter>소스 파일\12000</Filter>
+    </ClCompile>
+    <ClCompile Include="9376.cpp">
+      <Filter>소스 파일\9000</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
