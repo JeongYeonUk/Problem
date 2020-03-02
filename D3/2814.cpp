@@ -1,56 +1,62 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <cstring>
+#include <queue>
+#include <set>
 using namespace std;
 
-const int MAX = 11;
+#define endl '\n'
+
+typedef long long ll;
+
+const int INF = 987654321;
+const int MAX = 10 + 5;
 
 bool visit[MAX];
-int N, M;
-int maxDist;
-void dfs(int start, vector<int> a[MAX], int dist)
-{
-	visit[start] = true;
-	if (maxDist < dist)
-		maxDist = dist;
-	for (int i = 0; i < a[start].size(); ++i)
-	{
-		int next = a[start][i];
+int N, M, ans;
+
+void dfs(int cur, vector<int> graph[MAX], int dist) {
+	visit[cur] = true;
+	if (ans < dist) {
+		ans = dist;
+	}
+	for (int i = 0; i < graph[cur].size(); ++i) {
+		int next = graph[cur][i];
 		int nextDist = dist + 1;
-		if (!visit[next])
-		{
-			dfs(next, a, nextDist);
-			visit[next] = false;
-		}
+		if (visit[next])
+			continue;
+		dfs(next, graph, nextDist);
+		visit[next] = false;
 	}
 }
 
 int main()
 {
 	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
+	cout.tie(nullptr); cin.tie(nullptr);
 
-	int T; cin >> T;
-	for (int cases = 1; cases <= T; ++cases)
-	{
+	int tc; cin >> tc;
+	for (int t = 1; t <= tc; ++t) {
 		cin >> N >> M;
-		vector<int> a[MAX];
-		int ret = 0;
-		maxDist = 0;
-		for (int i = 0; i < M; ++i)
-		{
-			int x, y; cin >> x >> y;
-			a[x].push_back(y);
-			a[y].push_back(x);
+		if (M == 0) {
+			cout << '#' << t << " 1\n";
+			continue;
 		}
-		for (int i = 1; i <= N; ++i)
-		{
-			fill(visit, visit + MAX, 0);
-			dfs(i, a, 1);
-			if (ret < maxDist)
-				ret = maxDist;
+		vector<int> graph[MAX];
+		for (int i = 0; i < M; ++i) {
+			int a, b; cin >> a >> b;
+			graph[a].push_back(b);
+			graph[b].push_back(a);
 		}
-		cout << '#' << cases << ' ' << ret << '\n';
+
+		ans = 0;
+		for (int i = 1; i <= N; ++i) {
+			memset(visit, false, sizeof(visit));
+			dfs(i, graph, 1);
+		}
+
+		cout << '#' << t << ' ' << ans << endl;
 	}
 
 	return 0;
