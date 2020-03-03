@@ -87,6 +87,12 @@
     <ClCompile Include="3316.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="8382.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="8382_2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt">

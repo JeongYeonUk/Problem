@@ -1,21 +1,17 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include <cstdio>
 #include <cstring>
-#include <queue>
-#include <set>
 using namespace std;
 
 #define endl '\n'
-
-typedef long long ll;
-
-const int INF = 987654321;
+#define rint register int
+#define ll long long
+#define INF 987654321
+#define abs(x) (x > 0 ? x : -x)
+#define max(x,y) (x > y ? x : y)
+#define min(x,y) (x < y ? x : y)
 
 int main()
 {
-	ios_base::sync_with_stdio(false);
-	cout.tie(nullptr); cin.tie(nullptr);
 
 	return 0;
 }
