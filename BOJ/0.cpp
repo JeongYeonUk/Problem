@@ -1,17 +1,18 @@
-#include <cstdio>
+#include <iostream>
+#include <vector>
+#include <algorithm>
 #include <cstring>
 using namespace std;
 
-#define endl '\n'
-#define rint register int
-#define ll long long
-#define INF 987654321
-#define abs(x) (x > 0 ? x : -x)
-#define max(x,y) (x > y ? x : y)
-#define min(x,y) (x < y ? x : y)
+typedef long long ll;
+typedef pair<int, int> pii;
+typedef pair<ll, ll> pll;
 
-int main()
-{
+const int INF = 987654321;
+
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(0); cout.tie(0);
 
 	return 0;
 }
