@@ -1,13 +1,9 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
-#include <vector>
-#include <algorithm>
 #include <cstring>
 using namespace std;
 
 typedef long long ll;
-typedef pair<int, int> pii;
-typedef pair<ll, ll> pll;
 
 const int INF = 987654321;
 
