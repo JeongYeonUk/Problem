@@ -1,48 +1,46 @@
-#include <iostream>
+#define _CRT_SECURE_NO_WARNINGS
+#include <cstdio>
 #include <cstring>
+#include <set>
+#include <algorithm>
+#include <string>
 using namespace std;
-
-#define endl '\n'
 
 typedef long long ll;
 
 const int INF = 987654321;
-int N;
-string arr[20001];
 
-int main()
-{
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL); cout.tie(NULL);
+char buffer[128];
+int N, maxLen, len;
 
-    int tc = 0;
+int main() {
+	//freopen("input.txt", "r", stdin);
 
-    cin >> tc;
-    cin >> N;
+	int tc; scanf("%d", &tc);
+	for (int t = 1; t <= tc; ++t) {
+		scanf("%d", &N);
+
+		set<string> table[51];
+		for (int i = 0; i < N; ++i) {
+			scanf("%s", buffer);
+			len = strlen(buffer);
+			table[len].insert(buffer);
+			if (maxLen <= len)
+				maxLen = len;
+		}
+
+		string temp = "";
+		printf("#%d\n", t);
+		for (int i = 1; i <= maxLen; ++i) {
+			set<string>& cur = table[i];
+			if (cur.empty())
+				continue;
+			for (auto& out : cur) {
+				printf("%s\n", out.c_str());
+			}
+		}
+	}
 
 
-    for (int t = 1; t <= tc; t++) {
-        for (int i = 0; i < N; i++) {
-            cin >> arr[i];
-        }
-        for (int i = 0; i < N; i++) {
-            for (int j = i + 1; j < N; j++) {
-                if (arr[i].size() > arr[j].size()) {
-                    swap(arr[i], arr[j]);
-                }
-                else if (arr[i].size() == arr[j].size())
-                {
-                    if (arr[i] > arr[j])
-                        swap(arr[i], arr[j]);
-                }
-            }
-        }
-        cout << "#" << t << endl;
-        for (int i = 0; i < N; i++) {
-            if (arr[i] == arr[i + 1])
-                continue;
-            cout << arr[i] << endl;
-        }
-    }
-    return 0;
+	return 0;
 }
