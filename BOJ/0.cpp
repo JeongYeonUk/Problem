@@ -3,6 +3,8 @@
 #include <cstring>
 using namespace std;
 
+#define endl '\n'
+
 typedef long long ll;
 
 const int INF = 987654321;

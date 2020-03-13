@@ -120,6 +120,12 @@
     <ClCompile Include="7701.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="3378.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="3378_2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt">
