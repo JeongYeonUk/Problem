@@ -1,17 +1,18 @@
-#pragma warning (disable:4996)
+#define _CRT_SECURE_NO_WARNINGS
 #include <cstdio>
 using namespace std;
 
-#define MAX 300
+#define MAX 301
+#define rint register int
 
-typedef struct _pt
+struct POS
 {
 	int x; int y;
-}PT;
+};
 
 char map[MAX][MAX];
 
-PT Q[MAX * MAX];
+POS Q[MAX * MAX];
 int FP, RP;
 const int dx[] = { 1,1,0,-1,-1,-1,0,1 };
 const int dy[] = { 0,1,1,1,0,-1,-1,-1 };
@@ -21,7 +22,7 @@ inline void enqueue(int a, int b)
 {
 	Q[FP].y = a; Q[FP++].x = b;
 }
-inline PT dequeue()
+inline POS dequeue()
 {
 	return Q[RP++];
 }
@@ -29,7 +30,7 @@ inline PT dequeue()
 int count_mine(int y, int x)
 {
 	int mine = 0;
-	for (int i = 0; i < 8; ++i)
+	for (rint i = 0; i < 8; ++i)
 	{
 		int ny = y + dy[i];
 		int nx = x + dx[i];
@@ -44,16 +45,16 @@ void bfs(int y, int x)
 {
 	FP = RP = 0;
 	int mine = 0;
-	PT temp;
+	POS cur;
 	enqueue(y, x);
 	map[y][x] = '0';
 	while (RP < FP)
 	{
-		temp = dequeue();
-		for (int i = 0; i < 8; ++i)
+		cur = dequeue();
+		for (rint i = 0; i < 8; ++i)
 		{
-			int ny = temp.y + dy[i];
-			int nx = temp.x + dx[i];
+			int ny = cur.y + dy[i];
+			int nx = cur.x + dx[i];
 			if (ny < 0 || nx < 0 || ny >= N || nx >= N) continue;
 			if (map[ny][nx] == '.')
 			{
@@ -67,31 +68,31 @@ void bfs(int y, int x)
 
 int main()
 {
-	freopen("input.txt", "r", stdin);
+	//freopen("input.txt", "r", stdin);
 
 	int T; scanf("%d", &T);
-	for (int cases = 1; cases <= T; ++cases)
+	for (rint cases = 1; cases <= T; ++cases)
 	{
 		ans = 0;
 		scanf("%d", &N);
-		for (int i = 0; i < N; ++i)
+		for (rint i = 0; i < N; ++i)
 		{
 			scanf("%s", &map[i][0]);
 		}
-		for (int i = 0; i < N; ++i)
+		for (rint i = 0; i < N; ++i)
 		{
-			for (int j = 0; j < N; ++j)
+			for (rint j = 0; j < N; ++j)
 			{
 				if (map[i][j] == '.' && count_mine(i, j) == 0)
 				{
-					bfs(i,j);
+					bfs(i, j);
 					ans++;
 				}
 			}
 		}
-		for (int i = 0; i < N; ++i)
+		for (rint i = 0; i < N; ++i)
 		{
-			for (int j = 0; j < N; ++j)
+			for (rint j = 0; j < N; ++j)
 			{
 				if (map[i][j] == '.') ans++;
 			}
