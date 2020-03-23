@@ -1,151 +1,106 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <cstdio>
+#include <iostream>
 #include <cstring>
-#include <vector>
 #include <algorithm>
+#include <vector>
 #include <queue>
 using namespace std;
 
 #define endl '\n'
+#define X second
+#define Y first
 
 typedef long long ll;
+typedef pair<int, int> pii;
+typedef pair<ll, ll> pll;
 
 const int INF = 987654321;
 const int dy[] = { 0,0,1,-1 };
 const int dx[] = { 1,-1,0,0 };
+const int EMPTY = 0;
+const int GREEN = 1;
+const int RED = 2;
+const int FLOWER = 3;
 
-enum STATE
-{
-	GREEN = 10,
-	RED,
-	FLOWER
-};
+int garden[51][51];
+int N, M, G, R, ans;
 
-struct POS
-{
-	int y, x;
-};
+vector<pii> candi;
+int canSz;
+int brute[10];
 
-struct INFO
-{
-	int y, x, state, t;
-};
+int bfs() {
 
-int board[51][51];
-POS drag[11];
-int N, M, G, R, cnt, ans;
-vector<int> v;
+	int cnt = 0;
+	pii state[51][51]; // Y : time, X : state
 
-int bfs()
-{
-	int copy[51][51];
-	int time[51][51] = { 0, };
-	for (int y = 0; y < N; ++y)
-	{
-		for (int x = 0; x < M; ++x)
-		{
-			copy[y][x] = board[y][x];
-		}
-	}
-	queue<INFO> q;
-	for (int i = 0; i < cnt; ++i)
-	{
-		if (v[i] != 0)
-		{
-			q.push({ drag[i].y, drag[i].x, v[i],0 });
+	queue<pii> q;
+	for (int i = 0; i < canSz; ++i) {
+		if (brute[i] == GREEN || brute[i] == RED) {
+			state[candi[i].Y][candi[i].X] = make_pair(0, brute[i]);
+			q.push(candi[i]);
 		}
 	}
 
-	int candi = 0;
-	while (!q.empty())
-	{
-		int y = q.front().y; int x = q.front().x; int state = q.front().state; int t = q.front().t;
-		q.pop();
-		if (copy[y][x] == FLOWER)
+	while (!q.empty()) {
+		pii cur = q.front(); q.pop();
+		int curtime = state[cur.Y][cur.X].Y;
+		int curstate = state[cur.Y][cur.X].X;
+		if (curstate == FLOWER)
 			continue;
-		for (int dir = 0; dir < 4; ++dir)
-		{
-			int ny = y + dy[dir];
-			int nx = x + dx[dir];
-			int nt = t + 1;
+		for (int dir = 0; dir < 4; ++dir) {
+			int ny = cur.Y + dy[dir];
+			int nx = cur.X + dx[dir];
 			if (ny < 0 || nx < 0 || ny >= N || nx >= M)
 				continue;
-			if (copy[ny][nx] == 0 || copy[ny][nx] == FLOWER)
+			if (garden[ny][nx] == 0)
 				continue;
-			if (state == copy[ny][nx])
-				continue;
-			if (nt == time[ny][nx])
-			{
-				if ((state == GREEN) && (copy[ny][nx] == RED))
-				{
-					copy[ny][nx] = FLOWER;
-					candi++;
-					continue;
-				}
-				else if ((state == RED) && (copy[ny][nx] == GREEN))
-				{
-					copy[ny][nx] = FLOWER;
-					candi++;
-					continue;
-				}
-			}
-			else
-			{
-				if (copy[ny][nx] == 1 || copy[ny][nx] == 2)
-				{
-					copy[ny][nx] = state;
-					time[ny][nx] = nt;
-					q.push({ ny,nx, state, nt });
-				}
-			}
 
+			if (state[ny][nx].X == EMPTY) {
+				state[ny][nx] = make_pair(curtime + 1, curstate);
+				q.push(make_pair(ny, nx));
+			}
+			else if (state[ny][nx].X == RED) {
+				if (curstate == GREEN && curtime + 1 == state[ny][nx].Y) {
+					cnt++;
+					state[ny][nx].X = FLOWER;
+				}
+			}
+			else if (state[ny][nx].X == GREEN) {
+				if (curstate == RED && curtime + 1 == state[ny][nx].Y) {
+					cnt++;
+					state[ny][nx].X = FLOWER;
+				}
+			}
 		}
 	}
-	return candi;
+	return cnt;
 }
 
 int main() {
+	ios_base::sync_with_stdio(false);
+	cout.tie(NULL); cin.tie(NULL);
+
 	//freopen("input.txt", "r", stdin);
 
-	scanf("%d %d %d %d", &N, &M, &G, &R);
-	int widx = 0;
-	for (int y = 0; y < N; ++y)
-	{
-		for (int x = 0; x < M; ++x)
-		{
-			scanf("%d", &board[y][x]);
-			if (board[y][x] == 2)
-			{
-				cnt++;
-				drag[widx++] = { y, x };
+	cin >> N >> M >> G >> R;
+	for (int y = 0; y < N; ++y) {
+		for (int x = 0; x < M; ++x) {
+			cin >> garden[y][x];
+			if (garden[y][x] == 2) {
+				candi.push_back(make_pair(y, x));
 			}
 		}
 	}
+	
+	canSz = candi.size();
 
-	if ((G + R) != cnt)
-	{
-		for (int i = 0; i < (cnt - (G + R)); ++i)
-		{
-			v.push_back(0);
-		}
-	}
-	for (int i = 0; i < G; ++i)
-	{
-		v.push_back(GREEN);
-	}
-	for (int i = 0; i < R; ++i)
-	{
-		v.push_back(RED);
-	}
+	fill(brute + canSz - G - R, brute + canSz - R, GREEN);
+	fill(brute + canSz - R, brute + canSz, RED);
 
-	do
-	{
-		int candi = bfs();
-		if (ans < candi)
-			ans = candi;
-	} while (next_permutation(v.begin(), v.end()));
-
-	printf("%d\n", ans);
-
+	do {
+		ans = max(ans, bfs());
+	} while (next_permutation(brute, brute + canSz));
+	cout << ans << endl;
 	return 0;
 }
