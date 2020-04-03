@@ -1,13 +1,18 @@
 #include <iostream>
 #include <cstring>
+#include <algorithm>
+#include <mutex>
+#include <thread>
+#include <condition_variable>
 using namespace std;
 
-typedef long long ll;
+#define endl '\n'
+#define X first
+#define Y second
 
-inline int min(int a, int b)
-{
-  return a > b ? b : a;
-}
+typedef long long ll;
+typedef pair<int, int> pii;
+typedef pair<ll, ll> pll;
 
 const int INF = 987654321;
 const int MAX_N = 100001;

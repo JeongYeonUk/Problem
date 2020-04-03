@@ -5,8 +5,8 @@
 using namespace std;
 
 #define endl '\n'
-#define X second
-#define Y first
+#define X first
+#define Y second
 
 typedef long long ll;
 typedef pair<int, int> pii;
