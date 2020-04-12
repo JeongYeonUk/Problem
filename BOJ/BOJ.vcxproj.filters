@@ -795,5 +795,16 @@
     <ClCompile Include="17070.cpp">
       <Filter>소스 파일\17000</Filter>
     </ClCompile>
+    <ClCompile Include="2151.cpp">
+      <Filter>소스 파일\2000</Filter>
+    </ClCompile>
+    <ClCompile Include="16137.cpp">
+      <Filter>소스 파일\16000</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="input.txt">
+      <Filter>소스 파일</Filter>
+    </Text>
   </ItemGroup>
 </Project>
