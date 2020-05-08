@@ -19,6 +19,9 @@
     <Filter Include="소스 파일\LEVEL2">
       <UniqueIdentifier>{139037d0-4f93-4907-a2b6-137a17196203}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\KAKAO_WINTER">
+      <UniqueIdentifier>{dd034cc8-32d6-4bed-9569-521b1aaacf5f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="base.cpp">
@@ -188,6 +191,15 @@
     </ClCompile>
     <ClCompile Include="다음 큰 숫자2.cpp">
       <Filter>소스 파일\LEVEL2</Filter>
+    </ClCompile>
+    <ClCompile Include="크레인인형뽑기.cpp">
+      <Filter>소스 파일\KAKAO_WINTER</Filter>
+    </ClCompile>
+    <ClCompile Include="튜플.cpp">
+      <Filter>소스 파일\KAKAO_WINTER</Filter>
+    </ClCompile>
+    <ClCompile Include="불량사용자.cpp">
+      <Filter>소스 파일\KAKAO_WINTER</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
