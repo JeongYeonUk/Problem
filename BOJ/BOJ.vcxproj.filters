@@ -64,8 +64,8 @@
     <Filter Include="소스 파일\17000">
       <UniqueIdentifier>{b98791f8-85fb-411d-966a-0f0ed6ff6b9f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\20200321">
-      <UniqueIdentifier>{599a791b-af31-40bf-a979-9871fe3b38c6}</UniqueIdentifier>
+    <Filter Include="소스 파일\19000">
+      <UniqueIdentifier>{79ee1811-ea88-4814-8c5c-55c8bae2138b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -771,12 +771,6 @@
     <ClCompile Include="14395.cpp">
       <Filter>소스 파일\14000</Filter>
     </ClCompile>
-    <ClCompile Include="1.cpp">
-      <Filter>소스 파일\20200321</Filter>
-    </ClCompile>
-    <ClCompile Include="2.cpp">
-      <Filter>소스 파일\20200321</Filter>
-    </ClCompile>
     <ClCompile Include="13913.cpp">
       <Filter>소스 파일\13000</Filter>
     </ClCompile>
@@ -809,6 +803,9 @@
     </ClCompile>
     <ClCompile Include="6987.cpp">
       <Filter>소스 파일\6000</Filter>
+    </ClCompile>
+    <ClCompile Include="19235.cpp">
+      <Filter>소스 파일\19000</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
