@@ -27,5 +27,14 @@
     <ClCompile Include="Longest_Substring_Without_Repeating_Characters.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="3Sum.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Median_of_Two_Sorted_Arrays.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Longest_Palindromic_Substring.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
