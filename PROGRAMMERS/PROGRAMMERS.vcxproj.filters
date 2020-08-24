@@ -201,5 +201,14 @@
     <ClCompile Include="불량사용자.cpp">
       <Filter>소스 파일\KAKAO_WINTER</Filter>
     </ClCompile>
+    <ClCompile Include="멀쩡한 사각형.cpp">
+      <Filter>소스 파일\LEVEL2</Filter>
+    </ClCompile>
+    <ClCompile Include="카카오프렌즈 컬러링북.cpp">
+      <Filter>소스 파일\LEVEL2</Filter>
+    </ClCompile>
+    <ClCompile Include="문자열 압축.cpp">
+      <Filter>소스 파일\LEVEL2</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
