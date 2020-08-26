@@ -11,25 +11,25 @@ typedef long long ll;
 typedef pair<int, int> pii;
 typedef pair<ll, ll> pll;
 
-vector<int> solution(int brown, int red) 
+vector<int> solution(int brown, int red)
 {
-	vector<int> answer;
-	int sum = brown + red;
-	int limit = (int)sqrt(sum);
-	for (int i = 3; i <= limit; ++i)
-	{
-		if (sum % i == 0)
-		{
-			int tmp = sum / i;
-			if ((tmp - 2) * (i - 2) == red)
-			{
-				answer.push_back(tmp);
-				answer.push_back(i);
-				break;
-			}
-		}
+	// w * h = brown + red
+	// (w - 2) * (h - 2) = red
+	// 두 식을 연립방정식으로
+	// w + h = brown / 2 + 2;
+
+	int len = (brown >> 1) + 2;
+
+	int w = len - 3;
+	int h = 3;
+
+	while (w >= h) {
+		if (w * h == (brown + red)) break;
+		w--;
+		h++;
 	}
-	return answer;
+
+	return vector<int>(w, h);
 }
 int main()
 {
