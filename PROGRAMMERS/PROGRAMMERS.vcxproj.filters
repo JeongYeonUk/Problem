@@ -216,5 +216,23 @@
     <ClCompile Include="단체사진 찍기.cpp">
       <Filter>소스 파일\LEVEL2</Filter>
     </ClCompile>
+    <ClCompile Include="숫자의표현.cpp">
+      <Filter>소스 파일\LEVEL2</Filter>
+    </ClCompile>
+    <ClCompile Include="최댓값과최솟값.cpp">
+      <Filter>소스 파일\LEVEL2</Filter>
+    </ClCompile>
+    <ClCompile Include="최솟값만들기.cpp">
+      <Filter>소스 파일\LEVEL2</Filter>
+    </ClCompile>
+    <ClCompile Include="피보나치수.cpp">
+      <Filter>소스 파일\LEVEL2</Filter>
+    </ClCompile>
+    <ClCompile Include="행렬의곱셈.cpp">
+      <Filter>소스 파일\LEVEL2</Filter>
+    </ClCompile>
+    <ClCompile Include="수식최대화.cpp">
+      <Filter>소스 파일\LEVEL2</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
