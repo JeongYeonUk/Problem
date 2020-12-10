@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <vector>
 #include <cstring>
@@ -30,7 +31,6 @@ void solve()
 		int x, y;
 		x = abs(pos_people[i].first - pos_stairs[dir[i]].first);
 		y = abs(pos_people[i].second - pos_stairs[dir[i]].second);
-		// 도착 1분 후에 출발
 		people.push_back(x + y + 1);
 	}
 	while (to_exit_people)
@@ -38,11 +38,9 @@ void solve()
 		time++;
 		for (int i = 0; i < size; ++i)
 		{
-			// 이미 처리 완료
 			if (people[i] == -1)
 				continue;
-			// 계단을 내려갈 수 있음
-			else if (people[i] - 1 == 0 || people[i] == 0)
+			else if (people[i] - 1 == 0)
 			{
 				if (stairs[dir[i]].size() < 3)
 				{
@@ -54,7 +52,6 @@ void solve()
 				people[i]--;
 		}
 		int queue_size = stairs[0].size();
-		// 소요시간 확인 반복문
 		while (queue_size--)
 		{
 			int top = stairs[0].front();
@@ -85,20 +82,19 @@ void dfs(int idx)
 	if (idx == pos_people.size())
 		solve();
 	else
-	{
-		// 2가지 경우일때 다 해보는 방법
 		for (int i = 0; i < 2; ++i)
 		{
 			dir[idx] = i;
 			dfs(idx + 1);
 		}
-	}
 }
 
 int main()
 {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL);
+
+	freopen("input.txt", "r", stdin);
 
 	int T; cin >> T;
 	for (int cases = 1; cases <= T; ++cases)
