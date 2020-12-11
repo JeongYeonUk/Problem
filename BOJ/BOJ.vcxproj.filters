@@ -849,6 +849,24 @@
     <ClCompile Include="1436.cpp">
       <Filter>소스 파일\1000</Filter>
     </ClCompile>
+    <ClCompile Include="2460.cpp">
+      <Filter>소스 파일\2000</Filter>
+    </ClCompile>
+    <ClCompile Include="2161.cpp">
+      <Filter>소스 파일\2000</Filter>
+    </ClCompile>
+    <ClCompile Include="2947.cpp">
+      <Filter>소스 파일\2000</Filter>
+    </ClCompile>
+    <ClCompile Include="10813.cpp">
+      <Filter>소스 파일\10000</Filter>
+    </ClCompile>
+    <ClCompile Include="17837.cpp">
+      <Filter>소스 파일\17000</Filter>
+    </ClCompile>
+    <ClCompile Include="1063.cpp">
+      <Filter>소스 파일\1000</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt">

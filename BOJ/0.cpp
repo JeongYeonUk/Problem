@@ -6,13 +6,7 @@
 using namespace std;
 
 #define endl '\n'
-#define X first
-#define Y second
 #define INF 987654321
-
-typedef long long ll;
-typedef pair<int, int> pii;
-typedef pair<ll, ll> pll;
 
 int main() 
 {
