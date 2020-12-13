@@ -879,6 +879,12 @@
     <ClCompile Include="1713.cpp">
       <Filter>소스 파일\1000</Filter>
     </ClCompile>
+    <ClCompile Include="10811.cpp">
+      <Filter>소스 파일\10000</Filter>
+    </ClCompile>
+    <ClCompile Include="19238.cpp">
+      <Filter>소스 파일\19000</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt">
